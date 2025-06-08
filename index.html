@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>NUMBERWINE by INFINI</title>
+<style>
+  /* Reset & basics */
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    margin: 0; padding: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #0d0d14;
+    color: #e0e0e0;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  a {
+    color: #6efff0;
+    text-decoration: none;
+  }
+  a:hover {
+    text-decoration: underline;
+  }
+
+  header {
+    background: linear-gradient(90deg, #00ffe7 0%, #0064ff 100%);
+    padding: 1.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,255,231,0.3);
+  }
+  header h1 {
+    margin: 0;
+    font-weight: 700;
+    font-size: 2rem;
+  }
+  header p {
+    margin: 0;
+    font-weight: 400;
+    font-size: 1.1rem;
+    color: #c0c0c0;
+  }
+
+  main {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+  }
+  section {
+    margin-bottom: 3rem;
+  }
+  h2 {
+    border-bottom: 2px solid #00ffe7;
+    padding-bottom: 0.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+  }
+
+  /* Video section */
+  .video-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 255, 231, 0.3);
+  }
+  .video-wrapper iframe {
+    position: absolute;
+    top:0; left:0;
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+
+  /* Gallery */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
+    gap: 1rem;
+  }
+  .gallery img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,255,231,0.2);
+    transition: transform 0.3s ease;
+    cursor: pointer;
+  }
+  .gallery img:hover {
+    transform: scale(1.05);
+  }
+
+  /* Partners */
+  .partners {
+    background: #12121a;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: inset 0 0 15px #00ffe7aa;
+  }
+  .partners p {
+    font-size: 1.1rem;
+  }
+  .partners strong {
+    color: #00ffe7;
+  }
+
+  /* Contact */
+  .contact-list {
+    list-style: none;
+    padding: 0;
+  }
+  .contact-list li {
+    margin-bottom: 0.7rem;
+    font-size: 1.1rem;
+  }
+  .contact-list a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #00ffe7;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    header h1 {
+      font-size: 1.5rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>NUMBERWINE</h1>
+  <p>by INFINI</p>
+</header>
+
+<main>
+  <section id="video">
+    <h2>About Our Project</h2>
+    <div class="video-wrapper">
+      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+        title="Project Video" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <section id="photos">
+    <h2>Project Photos</h2>
+    <div class="gallery">
+      <img src="https://via.placeholder.com/300x200?text=Photo+1" alt="Project photo 1" />
+      <img src="https://via.placeholder.com/300x200?text=Photo+2" alt="Project photo 2" />
+      <img src="https://via.placeholder.com/300x200?text=Photo+3" alt="Project photo 3" />
+      <img src="https://via.placeholder.com/300x200?text=Photo+4" alt="Project photo 4" />
+      <img src="https://via.placeholder.com/300x200?text=Photo+5" alt="Project photo 5" />
+    </div>
+  </section>
+
+  <section id="partners">
+    <h2>Partners</h2>
+    <div class="partners">
+      <p>We collaborate with trusted partners to bring you exclusive benefits.</p>
+      <p><strong>As our friend, you get special discounts when buying our NFTs!</strong></p>
+    </div>
+  </section>
+
+  <section id="info">
+    <h2>More About Our Project</h2>
+    <p>
+      NUMBERWINE combines the finest wines with cutting-edge NFT technology, ensuring every purchase gives you a unique digital collectible. Join us in blending tradition with innovation.
+    </p>
+  </section>
+
+  <section id="contact">
+    <h2>Contact Us</h2>
+    <ul class="contact-list">
+      <li>Email: <a href="mailto:contact@numberwine.com">contact@numberwine.com</a></li>
+      <li>Telegram: <a href="https://t.me/yourtelegramhandle" target="_blank">@yourtelegramhandle</a></li>
+    </ul>
+  </section>
+</main>
+
+</body>
+</html>
