@@ -1,190 +1,493 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>NUMBERWINE by INFINI</title>
-<style>
-  /* Reset & basics */
-  * {
-    box-sizing: border-box;
-  }
-  body {
-    margin: 0; padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #0d0d14;
-    color: #e0e0e0;
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-  a {
-    color: #6efff0;
-    text-decoration: none;
-  }
-  a:hover {
-    text-decoration: underline;
-  }
-
-  header {
-    background: linear-gradient(90deg, #00ffe7 0%, #0064ff 100%);
-    padding: 1.5rem 1rem;
-    text-align: center;
-    box-shadow: 0 2px 8px rgba(0,255,231,0.3);
-  }
-  header h1 {
-    margin: 0;
-    font-weight: 700;
-    font-size: 2rem;
-  }
-  header p {
-    margin: 0;
-    font-weight: 400;
-    font-size: 1.1rem;
-    color: #c0c0c0;
-  }
-
-  main {
-    max-width: 900px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-  }
-  section {
-    margin-bottom: 3rem;
-  }
-  h2 {
-    border-bottom: 2px solid #00ffe7;
-    padding-bottom: 0.3rem;
-    margin-bottom: 1rem;
-    font-weight: 600;
-  }
-
-  /* Video section */
-  .video-wrapper {
-    position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    height: 0;
-    overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0, 255, 231, 0.3);
-  }
-  .video-wrapper iframe {
-    position: absolute;
-    top:0; left:0;
-    width: 100%;
-    height: 100%;
-    border: none;
-  }
-
-  /* Gallery */
-  .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fit,minmax(150px,1fr));
-    gap: 1rem;
-  }
-  .gallery img {
-    width: 100%;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,255,231,0.2);
-    transition: transform 0.3s ease;
-    cursor: pointer;
-  }
-  .gallery img:hover {
-    transform: scale(1.05);
-  }
-
-  /* Partners */
-  .partners {
-    background: #12121a;
-    padding: 1rem 1.5rem;
-    border-radius: 8px;
-    box-shadow: inset 0 0 15px #00ffe7aa;
-  }
-  .partners p {
-    font-size: 1.1rem;
-  }
-  .partners strong {
-    color: #00ffe7;
-  }
-
-  /* Contact */
-  .contact-list {
-    list-style: none;
-    padding: 0;
-  }
-  .contact-list li {
-    margin-bottom: 0.7rem;
-    font-size: 1.1rem;
-  }
-  .contact-list a {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-weight: 600;
-    color: #00ffe7;
-  }
-
-  /* Responsive */
-  @media (max-width: 600px) {
-    header h1 {
-      font-size: 1.5rem;
+<!DOCTYPE HTML>
+<!--
+	Story by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+	<head>
+		<title>Story by HTML5 UP</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="assets/css/main.css" />
+		<noscript><link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+ <style>
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0; top: 0; width: 100vw; height: 100vh;
+  overflow: auto;
+  background: rgba(30, 30, 30, 0.55);
+  backdrop-filter: blur(3px);
+}
+.modal-content {
+  background: rgba(255,255,255,0.90);
+  margin: 5vh auto;
+  padding: 3em 2em;
+  border: none;
+  width: 90vw;
+  max-width: 700px;
+  min-height: 72vh;      /* This sets the modal height to 40% of the viewport */
+  border-radius: 22px;
+  text-align: left;
+  position: relative;
+  box-shadow: 0 8px 48px rgba(0,0,0,0.25), 0 1.5px 8px #e2e2e2;
+  font-size: 1.2em;
+  transition: transform 0.2s;
+  animation: modalFadeIn 0.4s;
+}
+@keyframes modalFadeIn {
+  from { transform: translateY(60px) scale(0.97); opacity: 0; }
+  to   { transform: translateY(0) scale(1); opacity: 1; }
+}
+.close-modal {
+  color: #222;
+  background: rgba(200,200,200,0.4);
+  border-radius: 50%;
+  position: absolute;
+  top: 18px; right: 28px;
+  font-size: 34px; font-weight: bold; cursor: pointer;
+  width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.2s, color 0.2s;
+}
+.close-modal:hover, .close-modal:focus {
+  background: #222;
+  color: #fff;
+  text-decoration: none;
+  cursor: pointer;
+}
+    html {
+      scroll-behavior: smooth;
     }
-    h2 {
-      font-size: 1.3rem;
+    /* Make all main section images perfectly square and sharp corners */
+    .spotlight .image,
+    section.spotlight .image {
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-width: 400px; /* Change this value for bigger/smaller images */
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
+    .spotlight .image img,
+    section.spotlight .image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+      display: block;
+      border-radius: 0;
+    }
+  </style>
+	</head>
+<div id="age-verification" style="position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(34,34,34,0.85);z-index:9999;display:flex;align-items:center;justify-content:center;">
+  <div style="background:#fff;padding:1em 1.5em;border-radius:8px;text-align:center;box-shadow:0 0 10px #0004; max-width: 250px;">
+    <h2 style="font-size:1em; letter-spacing:0.10em; margin-bottom:1em;">ხართ თუ არა სრულწლოვანი?</h2>
+    <button onclick="verifyAge(true)" style="margin:0.7em 0.3em; padding:0.4em 1.2em; font-size:1em;">დიახ</button>
+    <button onclick="verifyAge(false)" style="margin:0.7em 0.3em; padding:0.4em 1.2em; background:#e74c3c; color:#fff; font-size:1em;">არა</button>
+  </div>
+</div>
+<script>
+function verifyAge(isOldEnough) {
+  if (isOldEnough) {
+    document.getElementById('age-verification').style.display = 'none';
+    localStorage.setItem('ageVerified', 'yes');
+  } else {
+    window.location.href = 'https://www.google.com/';
   }
-</style>
-</head>
-<body>
-
-<header>
-  <h1>NUMBERWINE</h1>
-  <p>by INFINI</p>
-</header>
-
-<main>
-  <section id="video">
-    <h2>About Our Project</h2>
-    <div class="video-wrapper">
-      <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
-        title="Project Video" allowfullscreen></iframe>
+}
+// Hide the age check if already verified
+if (localStorage.getItem('ageVerified') === 'yes') {
+  document.getElementById('age-verification').style.display = 'none';
+}
+</script>
+<body class="is-preload">
+<nav style="position:fixed;top:0;right:0;left:0;z-index:100;background:rgba(34,34,34,0.85);padding:0.7em 0;border-radius:0;">
+  <ul style="display:flex;justify-content:flex-end;gap:2em;list-style:none;margin:0;padding:0 3em;">
+    <li><a href="#home" style="color:#fff;text-decoration:none;font-weight:bold;">Home</a></li>
+    <li><a href="#about-wine" style="color:#fff;text-decoration:none;font-weight:bold;">About Wine</a></li>
+    <li><a href="#nft" style="color:#fff;text-decoration:none;font-weight:bold;">NFT</a></li>
+    <li><a href="#vip-party" style="color:#fff;text-decoration:none;font-weight:bold;">VIP Party</a></li>
+  </ul>
+</nav>
+		<!-- Wrapper -->
+			<div id="wrapper" class="divided">
+				<!-- One -->
+					<section id="home" class="banner style1 orient-left content-align-left image-position-right fullscreen onload-image-fade-in onload-content-fade-right">
+  <div class="content">
+    <h1>NUMBER WINE - ინფინისგან</h1>
+    <p class="major">შეიძინე Numberwine ღვინო Infini კომპანიიდან და მიიღე VIP NFT, რომელიც გაძლევს ექსკლუზიურ წვდომას ფართზე, განსაკუთრებულ ფასდაკლებებსა და სპეციალურ პრივილეგიებს მხოლოდ ჩვენი მომხმარებლებისთვის.</p>
+  </div>
+  <div class="image">
+    <div style="position: relative; width: 100%; height: 100%; padding-bottom: 56.25%;">
+      <iframe
+        src="https://www.youtube.com/embed/G-ao4fO88p8?autoplay=1&mute=1&controls=0&loop=1&playlist=G-ao4fO88p8"
+        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+        frameborder="0"
+        allow="autoplay; fullscreen"
+        allowfullscreen
+      ></iframe>
     </div>
-  </section>
+  </div>
+</section>
+				<!-- Two -->
+					<section id="about-wine" class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in" id="first">
+						<div class="content">
+							<h2>Magna etiam feugiat</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<ul class="actions stacked">
+								<li>
+  <a href="#" class="button learn-more-btn" data-info="Owning our NFT gives you exclusive benefits, including access to VIP events and exclusive wine releases.">Learn More</a>
+</li>
+						</div>
+						<div class="image">
+							<img <img class="img-hover" <img src="https://fratelliwines.in/cdn/shop/products/Artboard1_53a15f3c-85ec-4f43-89b3-e2396a4446ee_1200x.jpg?v=1634041520" alt="Wine Photo" />
+						</div>
+					</section>
+				<!-- Three -->
+					<section id="nft" class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>Tempus adipiscing</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<ul class="actions stacked">
+								<li><a href="#" class="button learn-more-btn" data-info="Our NFTs are digital collectibles that unlock unique perks and experiences for wine lovers.">Learn More</a></li>
+						</div>
+						<div class="image">
+							<img <img src="https://specials-images.forbesimg.com/imageserve/6410be3672b5236681ab6aba/960x0.jpg" alt="NFT Party" />
+						</div>
+					</section>
+				<!-- Four -->
+					<section id="vip-party" class="spotlight style1 orient-right content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>Pharetra etiam nulla</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<ul class="actions stacked">
+								<li><a href="#" class="button learn-more-btn" data-info="VIP Party details or your custom info here">Learn More</a></li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="https://specials-images.forbesimg.com/imageserve/6410be3672b5236681ab6aba/960x0.jpg" alt="NFT Party" />
+						</div>
+					</section>
+				<!-- Four added -->
+					<section class="spotlight style1 orient-left content-align-left image-position-center onscroll-image-fade-in">
+						<div class="content">
+							<h2>Tempus adipiscing</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum dolor sit amet.</p>
+							<ul class="actions stacked">
+								<li>
+  <a href="#" class="button learn-more-btn" data-info="Your custom info for this section goes here.">
+    Learn More
+  </a>
+</li>
+							</ul>
+						</div>
+						<div class="image">
+							<img src="images/spotlight02.jpg" alt="" />
+						</div>
+					</section>
+				<!-- Five -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>Massa sed condimentum</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum.</p>
+						</div>
+						<!-- Gallery -->
+							<div class="gallery style2 medium lightbox onscroll-fade-in">
+								<article>
+									<a href="images/gallery/fulls/01.jpg" class="image">
+										<img src="images/gallery/thumbs/01.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Ipsum Dolor</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/02.jpg" class="image">
+										<img src="images/gallery/thumbs/02.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Feugiat Lorem</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/03.jpg" class="image">
+										<img src="images/gallery/thumbs/03.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Magna Amet</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/04.jpg" class="image">
+										<img src="images/gallery/thumbs/04.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Sed Tempus</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/05.jpg" class="image">
+										<img src="images/gallery/thumbs/05.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Ultrices Magna</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/06.jpg" class="image">
+										<img src="images/gallery/thumbs/06.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Sed Tempus</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/07.jpg" class="image">
+										<img src="images/gallery/thumbs/07.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Ipsum Lorem</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/08.jpg" class="image">
+										<img src="images/gallery/thumbs/08.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Magna Risus</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/09.jpg" class="image">
+										<img src="images/gallery/thumbs/09.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Tempus Dolor</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/10.jpg" class="image">
+										<img src="images/gallery/thumbs/10.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Sed Etiam</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/11.jpg" class="image">
+										<img src="images/gallery/thumbs/11.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Magna Lorem</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+								<article>
+									<a href="images/gallery/fulls/12.jpg" class="image">
+										<img src="images/gallery/thumbs/12.jpg" alt="" />
+									</a>
+									<div class="caption">
+										<h3>Ipsum Dolor</h3>
+										<p>Lorem ipsum dolor amet, consectetur magna etiam elit. Etiam sed ultrices.</p>
+										<ul class="actions fixed">
+											<li><span class="button small">Details</span></li>
+										</ul>
+									</div>
+								</article>
+							</div>
+					</section>
+				<!-- Six -->
+					<section class="wrapper style1 align-center">
+						<div class="inner">
+							<h2>Ipsum sed consequat</h2>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi id ante sed ex pharetra lacinia sit amet vel massa. Donec facilisis laoreet nulla eu bibendum. Donec ut ex risus. Fusce lorem lectus, pharetra pretium massa et, hendrerit vestibulum odio lorem ipsum.</p>
+							<div class="items style1 medium onscroll-fade-in">
+								<section>
+									<span class="icon style2 major fa-gem"></span>
+									<h3>Lorem</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-save"></span>
+									<h3>Ipsum</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-chart-bar"></span>
+									<h3>Dolor</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-wifi"></span>
+									<h3>Amet</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-cog"></span>
+									<h3>Magna</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon style2 major fa-paper-plane"></span>
+									<h3>Tempus</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-desktop"></span>
+									<h3>Aliquam</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-sync-alt"></span>
+									<h3>Elit</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-hashtag"></span>
+									<h3>Morbi</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-bolt"></span>
+									<h3>Turpis</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-envelope"></span>
+									<h3>Ultrices</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+								<section>
+									<span class="icon solid style2 major fa-leaf"></span>
+									<h3>Risus</h3>
+									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi dui turpis, cursus eget orci amet aliquam congue semper. Etiam eget ultrices risus nec tempor elit.</p>
+								</section>
+							</div>
+						</div>
+					</section>
+				<!-- Seven -->
+					<section class="wrapper style1 align-center">
+						<div class="inner medium">
+							<h2>Get in touch</h2>
+							<form method="post" action="#">
+								<div class="fields">
+									<div class="field half">
+										<label for="name">Name</label>
+										<input type="text" name="name" id="name" value="" />
+									</div>
+									<div class="field half">
+										<label for="email">Email</label>
+										<input type="email" name="email" id="email" value="" />
+									</div>
+									<div class="field">
+										<label for="message">Message</label>
+										<textarea name="message" id="message" rows="6"></textarea>
+									</div>
+								</div>
+								<ul class="actions special">
+									<li><input type="submit" name="submit" id="submit" value="Send Message" /></li>
+								</ul>
+							</form>
+						</div>
+					</section>
+				<!-- Footer -->
+					<footer class="wrapper style1 align-center">
+						<div class="inner">
+							<ul class="icons">
+								<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a></li>
+								<li><a href="#" class="icon brands style2 fa-linkedin-in"><span class="label">LinkedIn</span></a></li>
+								<li><a href="#" class="icon style2 fa-envelope"><span class="label">Email</span></a></li>
+							</ul>
+							<p>&copy; Untitled. Design: <a href="https://html5up.net">HTML5 UP</a>.</p>
+						</div>
+					</footer>
+			</div>
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+<!-- Modal -->
+<div id="learnMoreModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal">&times;</span>
+    <h2 id="modalTitle">More Information</h2>
+    <p id="modalInfo"></p>
+  </div>
+</div>
+<script>
+  // Open modal and set info text
+  document.querySelectorAll('.learn-more-btn').forEach(btn => {
+    btn.onclick = function(event) {
+      event.preventDefault();
+      document.getElementById('modalTitle').textContent = "More Information";
+      document.getElementById('modalInfo').textContent = btn.getAttribute('data-info');
+      document.getElementById('learnMoreModal').style.display = 'block';
+    };
+  });
 
-  <section id="photos">
-    <h2>Project Photos</h2>
-    <div class="gallery">
-      <img src="https://via.placeholder.com/300x200?text=Photo+1" alt="Project photo 1" />
-      <img src="https://via.placeholder.com/300x200?text=Photo+2" alt="Project photo 2" />
-      <img src="https://via.placeholder.com/300x200?text=Photo+3" alt="Project photo 3" />
-      <img src="https://via.placeholder.com/300x200?text=Photo+4" alt="Project photo 4" />
-      <img src="https://via.placeholder.com/300x200?text=Photo+5" alt="Project photo 5" />
-    </div>
-  </section>
-
-  <section id="partners">
-    <h2>Partners</h2>
-    <div class="partners">
-      <p>We collaborate with trusted partners to bring you exclusive benefits.</p>
-      <p><strong>As our friend, you get special discounts when buying our NFTs!</strong></p>
-    </div>
-  </section>
-
-  <section id="info">
-    <h2>More About Our Project</h2>
-    <p>
-      NUMBERWINE combines the finest wines with cutting-edge NFT technology, ensuring every purchase gives you a unique digital collectible. Join us in blending tradition with innovation.
-    </p>
-  </section>
-
-  <section id="contact">
-    <h2>Contact Us</h2>
-    <ul class="contact-list">
-      <li>Email: <a href="mailto:contact@numberwine.com">contact@numberwine.com</a></li>
-      <li>Telegram: <a href="https://t.me/yourtelegramhandle" target="_blank">@yourtelegramhandle</a></li>
-    </ul>
-  </section>
-</main>
-
-</body>
+  // Close modal
+  document.querySelector('.close-modal').onclick = function() {
+    document.getElementById('learnMoreModal').style.display = 'none';
+  };
+  // Close modal when clicking outside content
+  window.onclick = function(event) {
+    if (event.target == document.getElementById('learnMoreModal')) {
+      document.getElementById('learnMoreModal').style.display = 'none';
+    }
+  };
+</script>
+	</body>
 </html>
